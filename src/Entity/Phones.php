@@ -6,7 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(collectionOperations={"get"},itemOperations={"get", "delete"}, attributes={"pagination_enabled"=true})
  * @ORM\Entity(repositoryClass="App\Repository\PhonesRepository")
  */
 class Phones
@@ -27,6 +27,16 @@ class Phones
      * @ORM\Column(type="integer")
      */
     private $price;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Specs", inversedBy="relation")
+     */
+    private $specs;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Supplier", inversedBy="relation")
+     */
+    private $supplier;
 
     public function getId(): ?int
     {
@@ -53,6 +63,30 @@ class Phones
     public function setPrice(int $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getSpecs(): ?Specs
+    {
+        return $this->specs;
+    }
+
+    public function setSpecs(?Specs $specs): self
+    {
+        $this->specs = $specs;
+
+        return $this;
+    }
+
+    public function getSupplier(): ?Supplier
+    {
+        return $this->supplier;
+    }
+
+    public function setSupplier(?Supplier $supplier): self
+    {
+        $this->supplier = $supplier;
 
         return $this;
     }
