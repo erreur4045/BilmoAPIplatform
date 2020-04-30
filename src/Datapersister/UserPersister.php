@@ -7,8 +7,6 @@ namespace App\Datapersister;
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class UserPersister implements DataPersisterInterface
