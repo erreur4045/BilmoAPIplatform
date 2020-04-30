@@ -6,7 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource(collectionOperations={"get"},itemOperations={"get", "delete"}, attributes={"pagination_enabled"=true})
+ * @ApiResource(collectionOperations={"get", "post"},itemOperations={"get", "delete"}, attributes={"pagination_enabled"=true})
  * @ORM\Entity(repositoryClass="App\Repository\PhonesRepository")
  */
 class Phones
@@ -17,6 +17,12 @@ class Phones
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $uuid;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -41,6 +47,18 @@ class Phones
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUuid(): ?string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(string $uuid): self
+    {
+        $this->uuid = $uuid;
+
+        return $this;
     }
 
     public function getName(): ?string
